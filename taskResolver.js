@@ -50,6 +50,22 @@ return tasks[taskIndex];
 }
 return null;
 },
-},
-};
+changeDescription: (_, { id, newDescription }) => {
+    const task = tasks.find(task => task.id === id);
+    if (task) {
+      task.description = newDescription;
+      return task;
+    }
+    return null;
+  },
+deleteTask: (_, { id }) => {
+    const taskIndex = tasks.findIndex(task => task.id === id);
+    if (taskIndex !== -1) {
+      const deletedTask = tasks[taskIndex];
+      tasks.splice(taskIndex, 1);
+      return deletedTask;
+    }
+    return null;
+  },
+},};
 module.exports = taskResolver;
